@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>実験1</title>
+  </head>
+  
+  <body>
+    <script>
+      // Canvas要素
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      canvas.width = 400;
+      canvas.height = 400;
+
+      canvas.setAttribute('style', 'display:block; margin:auto; background-color:#ddd');
+      document.body.appendChild(canvas);
+
+
+      const rect = {
+	  x: null,
+	  y: null,
+	  width: 10,
+	  height: 10,
+	  speed: 1,
+	  dx: null,
+	  dy: null,
+
+	  update: function() {
+	      ctx.fillRect(this.x, this.y, this.width, this.height);
+	      ctx.fill();
+
+	      if(this.x < 0 || this.x > canvas.width) this.dx *= -1;
+	      if(this.y < 0 || this.y > canvas.height) this.dy *= -1;
+	      if(this.x + 10 < 0 || this.x + 10 > canvas.width) this.dx *= -1;
+	      if(this.y + 10 < 0 || this.y + 10 > canvas.height) this.dy *= -1;
+	      
+	      this.x += this.dx;
+	      this.y += this.dy;
+	  }
+      }
+
+
+      const init = () => {
+	  rect.x = canvas.width/2;
+	  rect.y = canvas.height/2 + 50;
+	  rect.dx = rect.speed;
+	  rect.dy = rect.speed;
+      }
+	  
+      const main = () => {
+	  ctx.clearRect(0,0,canvas.width,canvas.height);
+	  rect.update();
+	  window.requestAnimationFrame(main);
+      }
+
+      init();
+      main();
+      
+      
+
+    </script>
+
+    <p>これは実験プログラムです。ゲーム性はありません。<br>
+    初めてのJavascriptプログラムになります。</p>
+  </body>
+</html>
+
+				    
+      
