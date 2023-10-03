@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>文字数カウント</title>
+    </head>
+    <body>
+        <form>
+            <label for="textForm">文章を入力</label><br>
+            <textarea id="textForm" cols="100" rows="20"></textarea><br>
+            <button id="button">カウント</button>
+            <button id="reset">リセット</button>
+        </form>
+        <label for="resultForm">文字数（空白込み）:</label>
+        <input type="text" id="resultForm"><br>
+        <label for="space_resultForm">文字数（空白無し）:</label>
+        <input type="text" id="space_resultForm">
+
+        <hr>
+        Javascriptにおけるif文，for文，配列，計算を一通り使うのにちょうどよいかと考え制作．<br>
+        大学生がよく利用するであろう某サイトには及ばないけれど，文字数のカウントだけならここでも可能です．
+    </body>
+
+    <script>
+        var button = document.getElementById("button");
+
+        function reseter() {
+            document.textForm.reset();
+        }
+
+        button.addEventListener("click", function(e) {
+            e.preventDefault();
+            var text = document.getElementById("textForm").value;
+            var result = document.getElementById("resultForm");
+            var space_result = document.getElementById("space_resultForm");
+            
+            var strings = text.split('');
+            var n = strings.length;
+
+            var a = 0;
+            var b = 0;
+            for (var i = 0; i < n; i++) {
+                if (strings[i] == '\n') a += 1;
+                if (strings[i] == ' ') b += 1;
+            }
+            result.value = n - a;
+            space_result.value = n - a - b;
+        });
+
+
+    </script>
+</html>
